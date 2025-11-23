@@ -13,7 +13,8 @@ from datetime import datetime, timedelta
 from src.models.data_models import InputData
 from src.database.repository import FuturesDataRepository
 from src.database.database import db_manager
-
+from src.data_fetcher.akshare_client import akshare_client
+from src.input.data_processor import data_processor
 
 
 def test_sql():
@@ -28,8 +29,18 @@ def test_sql():
         else:
             print(test_result.trade_date) 
 
+def test_akload():
+    """测试全量拉取螺纹钢效果"""
+    print("进行螺纹钢全量拉取测试")
+    try:
+        symbol = "螺纹钢主连"
+        df = data_processor.fetch_and_process_symbol(symbol= symbol)
+    except Exception as e:
+        print(f"❌ 数据处理测试失败: {e}")
+
+
 if __name__ == "__main__":
-    test_sql()
+    test_akload()
 
     
 

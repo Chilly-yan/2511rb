@@ -70,9 +70,25 @@ class AkshareClient:
         except Exception as e:
             logger.error(f"❌ 获取期货数据失败: {symbol}, 错误: {e}")
             raise
-    
+
+        
+    def get_futures_full_data(self, symbol:str, period: str = "daily", start_date:Optional[str] = None, end_date:Optional[str] = None) :
+        """获取目标品种全量数据信息"""
+        if start_date is None or end_date is None:
+            df = ak.futures_hist_em(symbol=symbol, period= period)
+        else:
+            df = ak.futures_hist_em(symbol=symbol, period= period, start_date= start_date, end_date= end_date)
+
+        if df.empty:
+            logger.warning(f"⚠️ 未获取到数据: {symbol}")
+            return df
+        
+        logger.info(f"成功获取{symbol}数据")
+        return df         
+
     def get_futures_recent_data(self, symbol: str, days: int = 30) -> pd.DataFrame:
         """获取最近N天的期货数据（简化方法）"""
+
         start_date = (datetime.now() - timedelta(days=days)).strftime("%Y%m%d")
         end_date = datetime.now().strftime("%Y%m%d")
         

@@ -17,7 +17,7 @@ class DataProcessor:
     def __init__(self):
         self.akshare_client = akshare_client
     
-    def fetch_and_process_symbol(self, symbol: str, days: int = 30) -> Dict[str, Any]:
+    def fetch_and_process_symbol(self, symbol: str, days: int| None = None) -> Dict[str, Any]:
         """获取并处理单个品种数据"""
         try:
             # 验证品种
@@ -25,7 +25,10 @@ class DataProcessor:
                 return {'success': False, 'error': f'不支持的品种: {symbol}'}
             
             # 获取数据
-            df = self.akshare_client.get_futures_recent_data(symbol, days)
+            if days is None:
+                df = self.akshare_client.get_futures_full_data(symbol)
+            else:
+                df = self.akshare_client.get_futures_recent_data(symbol, days)
             
             if df.empty:
                 return {'success': False, 'error': '数据为空'}
