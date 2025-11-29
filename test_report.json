@@ -1,0 +1,39 @@
+{
+  "report_date": "2025-11-29",
+  "total_signals": 0,
+  "buy_signals": 0,
+  "sell_signals": 0,
+  "hold_signals": 0,
+  "high_confidence_signals": 0,
+  "accuracy_stats": {
+    "total": 0,
+    "accuracy_rate": 0.0,
+    "by_suggestion": {}
+  },
+  "analysis_stats": {
+    "total_count": 0,
+    "success_count": 0,
+    "success_rate": 0,
+    "by_suggestion": {},
+    "by_trend_type": {},
+    "by_risk_level": {},
+    "by_analysis_method": {},
+    "avg_confidence": 0.0,
+    "latest_analysis": null
+  },
+  "market_stats": {
+    "total_count": 4061,
+    "symbols_count": 1,
+    "by_symbol": {
+      "螺纹钢主连": {
+        "count": 4061,
+        "latest_time": "2025-11-24 00:00:00",
+        "avg_price": 3679.721497168185
+      }
+    }
+  },
+  "signals": [],
+  "summary": "今日无交易信号",
+  "trend_analysis": {},
+  "performance_metrics": {}
+}

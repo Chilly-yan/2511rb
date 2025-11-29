@@ -123,13 +123,19 @@ class FuturesDataRepository(BaseRepository):
             .order_by(InputData.trade_date.asc())\
             .all()
     
-    def get_latest_data(self, symbol: str, limit: int = 1) -> Optional[InputData]:
+    def get_latest_data(self, symbol: str, limit: int = 1):
         """获取某品种的最新数据"""
-        return self.db.query(InputData)\
+        sql_result = self.db.query(InputData)\
             .filter(InputData.symbol == symbol)\
             .order_by(InputData.trade_date.desc())\
             .limit(limit)\
             .first()
+        
+        if sql_result:
+            sql_data = {k:v for k,v in sql_result.__dict__.items() if k != '_sa_instance_state'}
+        else:
+            sql_data = None
+        return sql_data
     
     def update_status(self, data_id: int, status: str) -> bool:
         """更新数据状态"""

@@ -30,6 +30,20 @@ class InputData(Base):
     status = Column(String(20), default="pending")                 # pending/processing/processed/error
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
+class FuturnsIndex(Base):
+    """期货综合指数表"""
+    __tablename__ = "futures_index"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    symbol = Column(String(50), nullable=False)                      # 品种名称
+    index_date = Column(DateTime, nullable=False)                    # 指数日期
+    index_name = Column(String(100), nullable=False)                 # 指数名称
+    index_value = Column(DECIMAL(15, 4), nullable=False)            # 指数值
+    
+    # 系统字段
+    data_source = Column(String(100), default="calculated")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
 class AnalysisResult(Base):
     """分析结果表"""
     __tablename__ = "analysis_results"
